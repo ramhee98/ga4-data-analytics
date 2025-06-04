@@ -13,7 +13,7 @@ def fetch_data(start_date, end_date):
     request = RunReportRequest(
         property=f"properties/{config.GA4_PROPERTY_ID}",
         dimensions=[Dimension(name="date")],
-        metrics=[Metric(name="sessions"), Metric(name="activeUsers")],
+        metrics=[Metric(name="sessions"), Metric(name="activeUsers"), Metric(name="screenPageViews")],
         date_ranges=[DateRange(start_date=start_date, end_date=end_date)],
     )
     response = client.run_report(request)
