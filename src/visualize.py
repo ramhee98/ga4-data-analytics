@@ -1,13 +1,29 @@
 import matplotlib.pyplot as plt
+import seaborn as sns
+import streamlit as st
 
 def plot_sessions_users(df):
-    plt.figure(figsize=(10, 5))
-    plt.plot(df["date"], df["sessions"], label="Sessions", marker="o")
-    plt.plot(df["date"], df["activeUsers"], label="Active Users", marker="o")
-    plt.xlabel("Date")
-    plt.ylabel("Count")
-    plt.legend()
-    plt.title("Sessions and Users over Time")
-    plt.grid(True)
-    plt.tight_layout()
-    plt.show()
+    # Group by date to avoid overlapping lines
+    df_grouped = df.groupby("date", as_index=False)[["sessions", "activeUsers"]].sum()
+    df_grouped = df_grouped.sort_values("date")
+
+    # Plotting
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.plot(df_grouped["date"], df_grouped["sessions"], label="Sessions", marker="o")
+    ax.plot(df_grouped["date"], df_grouped["activeUsers"], label="Active Users", marker="o")
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Count")
+    ax.set_title("Sessions and Active Users Over Time")
+    ax.legend()
+    ax.grid(True)
+    st.pyplot(fig)
+
+
+def plot_sessions_vs_users(df):
+    fig, ax = plt.subplots(figsize=(6, 6))
+    sns.regplot(x="sessions", y="activeUsers", data=df, ax=ax)
+    ax.set_xlabel("Sessions")
+    ax.set_ylabel("Active Users")
+    ax.set_title("Sessions vs Active Users")
+    ax.grid(True)
+    st.pyplot(fig)

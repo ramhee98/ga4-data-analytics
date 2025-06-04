@@ -4,6 +4,7 @@ from datetime import date, timedelta
 from src.fetch_data import fetch_data
 from src.process_data import response_to_dataframe
 from src.visualize import plot_sessions_users
+from src.visualize import plot_sessions_vs_users
 
 st.title("GA4 Data Analytics Dashboard")
 
@@ -15,3 +16,4 @@ if st.button("Fetch and Visualize Data"):
     df = response_to_dataframe(response)
     st.write(df)
     plot_sessions_users(df)
+    plot_sessions_vs_users(df)

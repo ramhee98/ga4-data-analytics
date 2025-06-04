@@ -3,3 +3,4 @@ pandas
 matplotlib
 google-analytics-data
 google-auth
+seaborn
