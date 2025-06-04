@@ -48,3 +48,8 @@ To connect this app to your GA4 property, follow these steps:
 ```bash
 sh run_app.sh
 ```
+
+## 📊 Dashboard Preview
+
+![Summary View](img/dashboard_summary_view.png)
+![Visualizations](img/dashboard_visualizations.png)
