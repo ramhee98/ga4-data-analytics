@@ -15,5 +15,14 @@ if st.button("Fetch and Visualize Data"):
     response = fetch_data(str(start_date), str(end_date))
     df = response_to_dataframe(response)
     st.write(df)
+
+    st.subheader("Summary")
+    total_sessions = df["sessions"].sum()
+    total_active_users = df["activeUsers"].sum()
+    col1, col2 = st.columns(2)
+    col1.metric("Total Sessions", f"{total_sessions:,}")
+    col2.metric("Total Active Users", f"{total_active_users:,}")
+    st.caption(f"Average Sessions per Day: {df['sessions'].mean():.1f}")
+
     plot_sessions_users(df)
     plot_sessions_vs_users(df)
